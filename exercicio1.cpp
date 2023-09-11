@@ -2,7 +2,7 @@
 
 using namespace std;
 
-struct passageiro
+struct Passageiro
 {
     string nome;
     string cpf;
@@ -10,13 +10,13 @@ struct passageiro
 
 };
 
-struct passagem {
+struct Passagem {
     float valor;
     int assento;
 
 };
 
-struct data_hora {
+struct Data_Hora {
     int dia;
     int mes;
     int ano;
@@ -24,6 +24,10 @@ struct data_hora {
 };
 
 int main() {
+    Passageiro p1;
+    Passagem p1;
+    Data_Hora p1;
+    
     return 0;
 }
 
