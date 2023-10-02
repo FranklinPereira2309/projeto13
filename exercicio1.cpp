@@ -4,75 +4,92 @@
 
 using namespace std;
 
-// struct Passageiro
-// {
-//     string nome;
-//     string cpf;
-//     int idade;
-
-// };
-
-struct Passagem {
-    float valor = 80;
-    int assento;
+struct Passageiro
+{
     string nome;
     string cpf;
     int idade;
+
+};
+
+
+struct Data_Hora 
+{
     int dia;
     int mes;
     int ano = 365;
     int hora;
-    string tipoViagem;
-
 };
 
-// struct Data_Hora {
-// };
+struct Passagem 
+{
+    float valor = 80;
+    int assento = 0;
+    string tipoViagem;
+    Passageiro passageiro;
+    Data_Hora data_hora;
+    string cidade;
+
+};
+void totalPorViagem(vector<Passagem>& passagem);
 
 int main() {
     vector<Passagem> viagens;
     Passagem novaPassagem;
 
-    string tempString;
+    char tempString;
     bool continuar = true;
 
-    float valorObtido = 0, qtdLugares = 0;
-    int sair = 1;
-    int conte;
+    //float valorObtido = 0, qtdLugares = 0;
+   
     
         
      while(continuar) {
                 cout << "Digite seu nome: ";
-                getline(cin >> ws,novaPassagem.nome);
+                getline(cin >> ws,novaPassagem.passageiro.nome);
                 cout << "Digite seu cpf: ";
-                getline(cin >> ws, novaPassagem.cpf);
+                getline(cin >> ws, novaPassagem.passageiro.cpf);
                 cout << "Digite o dia: ";
-                cin >> novaPassagem.dia;
+                cin >> novaPassagem.data_hora.dia;
                 cout << "Digite o mes: ";
-                cin >> novaPassagem.mes;
+                cin >> novaPassagem.data_hora.mes;
                 cout << "Digite tipo de percurso (IDA/VOLTA): ";
                 cin >> novaPassagem.tipoViagem;
+                cout << "Digite a cidade[RJ / SP ?]: ";
+                getline(cin >> ws, novaPassagem.cidade);
                 cout << "Digite o horario: ";
-                cin >> novaPassagem.hora;
-                cout << "Continuar(s/n)? ";
+                cin >> novaPassagem.data_hora.hora;
+                cout << "Digite o numero da poltrona: ";
+                cin >> novaPassagem.assento;
                 viagens.push_back(novaPassagem);
-                getline(cin >> ws, tempString);
-                continuar = tempString == "s"? true : false;
+                cout << "\nContinuar(s/n)? \n";
+                cin >> tempString;
+                continuar = tempString == 's'|| tempString == 'S'? true : false;
     }
         
-               
-    
-
-    // for(int i = 0 ; i < conte; i++) {
-            
-    //     }
-
-    
-    
-
-
+    totalPorViagem(viagens);
+   
     
     return 0;
 }
 
 
+void totalPorViagem(vector<Passagem>& passagem) {
+    string cpf;
+    float result = 0;
+    int conte = 0;
+    
+    
+    getline(cin >> ws, cpf);
+    for(auto it=passagem.begin(); it!=passagem.end(); it++) {
+        if(it->assento > 0 && it->assento <= 40) {
+        
+            conte++;
+            result += it->valor;
+
+        }
+
+    }   
+        cout << "Foram vendidas " <<  conte << " poltronas" << endl;
+        cout << fixed << setprecision(2) <<  "Total arrecadado: R$ " <<  result << endl;
+};
